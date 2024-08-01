@@ -14,6 +14,6 @@ class Knight
   def create_possible_moves
     arr = []
     TRANSFORMATIONS.each { |transf| arr << [@current_position[0] + transf[0], @current_position[1] + transf[1]] }
-    arr
+    arr.select! { |position| position[0].between?(0, 7) && position[1].between?(0, 7) }
   end
 end
