@@ -7,6 +7,7 @@ class Node
   def initialize(x_coord, y_coord)
     @x_pos = x_coord
     @y_pos = y_coord
+    @children = []
   end
 
   def to_s
