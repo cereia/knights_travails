@@ -2,18 +2,16 @@
 
 # Knight class that holds all information regarding the knight
 class Knight
-  attr_accessor :current_position, :next_move
+  include Transformations
+  attr_accessor :current_position, :children
 
-  TRANSFORMATIONS = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [1, -2], [-1, 2], [-1, -2]].freeze
-
-  def initialize(position)
+  def initialize(position, parent = nil)
     @current_position = position
-    @next_move = create_possible_moves
+    @parent = parent
+    @children = create_possible_moves(position)
   end
 
-  def create_possible_moves
-    arr = []
-    TRANSFORMATIONS.each { |transf| arr << [@current_position[0] + transf[0], @current_position[1] + transf[1]] }
-    arr.select! { |position| position[0].between?(0, 7) && position[1].between?(0, 7) }
+  def to_s
+    "current_position: #{@current_position}\nparent: #{@parent}\nchildren #{@children}\n\n"
   end
 end
