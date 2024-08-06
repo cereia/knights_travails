@@ -3,15 +3,16 @@
 # Node class that represents each square on the board and their coordinates
 class Node
   include Transformations
-  attr_reader :node_x, :node_y, :knight_positions
+  attr_reader :node_coordinates, :knight_positions
+  attr_accessor :parent
 
-  def initialize(x_coord, y_coord)
-    @node_x = x_coord
-    @node_y = y_coord
-    @knight_positions = create_possible_moves([@node_x, @node_y])
+  def initialize(data, parent = nil)
+    @node_coordinates = data
+    @knight_positions = create_possible_moves(@node_coordinates)
+    @parent = parent
   end
 
   def to_s
-    "coordinates: #{[@node_x, @node_y]} knight positions: #{@knight_positions}"
+    "coordinates: #{@node_coordinates} knight positions: #{@knight_positions} parent: #{@parent}"
   end
 end
