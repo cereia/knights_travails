@@ -2,7 +2,6 @@
 
 # Board class
 class Board
-  include Transformations
   attr_reader :board
 
   def initialize
