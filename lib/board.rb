@@ -34,6 +34,8 @@ class Board
   end
 
   def make_path(queue, end_node, history, visited = [])
+    # history holds all nodes that are visited during the breadth first search
+    # visited holds the shortest path needed to get from start_pos to end_pos
     return visited if visited.include?(end_node.node_coordinates)
 
     node = queue.shift
