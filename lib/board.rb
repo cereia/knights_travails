@@ -15,6 +15,7 @@ class Board
 
     queue = [start_node]
     path = make_path(queue, end_node, [start_pos])
+    fill_in_parents(path)
     puts "You made it from #{start_pos} to #{end_pos} in #{path.length - 1} #{path.length - 1 > 1 ? 'moves' : 'move'}!"
     puts "Here's your path:"
     path.reverse.each { |position| p position }
@@ -42,6 +43,24 @@ class Board
       traverse_the_children(node, history, queue)
       make_path(queue, end_node, history, visited)
     end
+  end
+
+  # add any necessary parents to the array
+  def fill_in_parents(arr)
+    arr.each do |position|
+      current = find_node(position)
+      next if current.parent.nil?
+
+      arr << current.parent unless arr.include?(current.parent)
+    end
+    remove_all_parents
+    arr
+  end
+
+  # parent variable of the nodes are removed to prevent interference
+  # with filling parent positions with successive knight_moves calls on the same game board
+  def remove_all_parents
+    @board.each { |node| node.parent = nil }
   end
 
   def traverse_the_children(node, history, queue)
